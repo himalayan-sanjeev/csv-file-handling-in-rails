@@ -1,9 +1,23 @@
 class UsersController < ApplicationController
+  # require 'csv'
   before_action :set_user, only: %i[ show edit update destroy ]
 
   # GET /users or /users.json
   def index
     @users = User.all
+  end
+
+  def export_into_csv
+    file = "#{Rails.root}/public/user_data.csv"
+    users = User.order(:first_name)
+    headers = ["S.N.","first_name","last_name","address_city","address_state","mobile_number","email", "date_of_birth"]
+
+    CSV.open(file, 'w', write_headers: true, headers: headers) do |writer|
+      users.each do |user|
+        writer << [user.id, user.first_name, user.last_name, user.address_city, user.address_state, user.mobile_number, user.email, user.date_of_birth]
+      end
+    end
+    redirect_to root_path
   end
 
   # GET /users/1 or /users/1.json

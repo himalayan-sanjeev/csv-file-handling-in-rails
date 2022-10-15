@@ -4,4 +4,6 @@ Rails.application.routes.draw do
 
   # Defines the root path route ("/")
   root "users#index"
+  get 'export_into_csv', to: 'users#export_into_csv'
+
 end
