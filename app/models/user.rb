@@ -10,7 +10,7 @@ class User < ApplicationRecord
    end
   
   def self.import(file)
-    CSV.foreach(file.path, headers: true) do |row|
+    CSV.foreach(file.path, headers: true, col_sep: ",") do |row|
       User.create! row.to_hash
     end
   end
