@@ -4,8 +4,12 @@ class UsersController < ApplicationController
   # GET /users or /users.json
   def index
     @users = User.all
+    respond_to do |format|
+      format.html
+      format.csv { send_data User.to_csv, filename: "Users-#{DateTime.now.strftime("%d%m%Y%H%M")}.csv"}
+    end
   end
-
+   
   # GET /users/1 or /users/1.json
   def show
   end
