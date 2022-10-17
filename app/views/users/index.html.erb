@@ -1,0 +1,50 @@
+<p style="color: green"><%= notice %></p>
+
+<div class="d-flex justify-content-between">
+  <div>
+    <%= link_to "Create New User", new_user_path, class: "btn btn-primary" %>
+  </div>
+  <div>
+    <h5>Import Users from CSV File </h5>
+    <%= form_tag import_users_path, multipart: true do %>
+      <%= file_field_tag :file %>
+      <%= submit_tag "Import Users", class:"btn btn-primary" %>
+    <% end %>
+  </div>
+</div>
+<hr>
+<div class="d-flex justify-content-end">
+    <%= link_to "Export as CSV", users_path(format: 'csv'), class: "btn btn-success" %>
+</div>
+
+<h1>Users</h1>
+<hr>
+<table class="table">
+    <thead class="thead-dark">
+      <tr>
+        <th scope="col">S.N.</th>
+        <th scope="col">First Name</th>
+        <th scope="col">Last Name</th>
+        <th scope="col">Address City</th>
+        <th scope="col">Address State</th>
+        <th scope="col">Mobile Number</th>
+        <th scope="col">Email</th>
+        <th scope="col">Date of Birth</th>
+
+      </tr>
+    </thead>
+    <tbody>
+      <% @users.each do |user| %>
+      <tr>
+        <th scope="row"><%= user.id %></th>
+        <th scope="row"><%= user.first_name %></th>
+        <th scope="row"><%= user.last_name %></th>
+        <th scope="row"><%= user.address_city %></th>
+        <th scope="row"><%= user.address_state %></th>
+        <th scope="row"><%= user.mobile_number %></th>
+        <th scope="row"><%= user.email %></th>
+        <th scope="row"><%= user.date_of_birth %></th>
+      </tr>
+      <% end %>
+    </tbody>
+</table>
