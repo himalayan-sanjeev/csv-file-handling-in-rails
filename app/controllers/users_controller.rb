@@ -5,6 +5,10 @@ class UsersController < ApplicationController
   # GET /users or /users.json
   def index
     @users = User.all
+    respond_to do |format|
+      format.html
+      format.csv { send_data User.to_csv, filename: "Users-#{DateTime.now.strftime("%d%m%Y%H%M")}.csv"}
+    end
   end
 
   def export_into_csv
@@ -20,6 +24,7 @@ class UsersController < ApplicationController
     redirect_to root_path
   end
 
+   
   # GET /users/1 or /users/1.json
   def show
   end
@@ -39,7 +44,7 @@ class UsersController < ApplicationController
 
     respond_to do |format|
       if @user.save
-        format.html { redirect_to user_url(@user), notice: "User was successfully created." }
+        format.html { redirect_to root_path, notice: "User was successfully created." }
         format.json { render :show, status: :created, location: @user }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -69,6 +74,11 @@ class UsersController < ApplicationController
       format.html { redirect_to users_url, notice: "User was successfully destroyed." }
       format.json { head :no_content }
     end
+  end
+
+  def import_users
+    User.import(params[:file])
+    redirect_to root_path, message: "Data imported!"
   end
 
   private
