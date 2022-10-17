@@ -8,7 +8,7 @@ class UsersController < ApplicationController
   end
 
   def export_into_csv
-    file = "#{Rails.root}/public/user_data.csv"
+    file = "#{Rails.root}/public/user_data-#{DateTime.now.strftime("%d%m%Y%H%M")}.csv"
     users = User.order(:first_name)
     headers = ["S.N.","first_name","last_name","address_city","address_state","mobile_number","email", "date_of_birth"]
 
