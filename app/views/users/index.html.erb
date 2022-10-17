@@ -13,8 +13,9 @@
   </div>
 </div>
 <hr>
-<div class="d-flex justify-content-end">
-    <%= link_to "Export as CSV", users_path(format: 'csv'), class: "btn btn-success" %>
+<div class="d-flex justify-content-between">
+    <%= link_to "Export into CSV", export_into_csv_path, class: "btn btn-success" %><br><br>
+    <%= link_to "Download as CSV file", users_path(format: 'csv'), class: "btn btn-success" %>
 </div>
 
 <h1>Users</h1>
@@ -30,6 +31,7 @@
         <th scope="col">Mobile Number</th>
         <th scope="col">Email</th>
         <th scope="col">Date of Birth</th>
+        <th scope="col">Action</th>
 
       </tr>
     </thead>
@@ -37,14 +39,16 @@
       <% @users.each do |user| %>
       <tr>
         <th scope="row"><%= user.id %></th>
-        <th scope="row"><%= user.first_name %></th>
-        <th scope="row"><%= user.last_name %></th>
-        <th scope="row"><%= user.address_city %></th>
-        <th scope="row"><%= user.address_state %></th>
-        <th scope="row"><%= user.mobile_number %></th>
-        <th scope="row"><%= user.email %></th>
-        <th scope="row"><%= user.date_of_birth %></th>
+        <td><%= user.first_name %></td>
+        <td><%= user.last_name %></td>
+        <td><%= user.address_city %></td>
+        <td><%= user.address_state %></td>
+        <td><%= user.mobile_number %></td>
+        <td><%= user.email %></td>
+        <td><%= user.date_of_birth %></td>
+        <td><%= link_to "View", user_path(user), class:"btn btn-warning" %></td>
       </tr>
       <% end %>
     </tbody>
-</table>
+  </table>
+  <hr>
