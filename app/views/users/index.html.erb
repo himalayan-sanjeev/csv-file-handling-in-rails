@@ -46,7 +46,12 @@
         <td><%= user.mobile_number %></td>
         <td><%= user.email %></td>
         <td><%= user.date_of_birth %></td>
-        <td><%= link_to "View", user_path(user), class:"btn btn-warning" %></td>
+        <td>
+          <%= link_to "View", user_path(user), class:"btn btn-primary" %>
+          <%= link_to "Edit", edit_user_path(user), class:"btn btn-warning" %>
+          <%= link_to "Delete", user, class: "button",
+              data: { turbo_method: :delete, turbo_confirm: "Really?!?" }, class: "btn btn-danger" %>
+        </td>
       </tr>
       <% end %>
     </tbody>
